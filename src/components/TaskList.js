@@ -37,19 +37,28 @@ const TaskList = () => {
         </tr>
       </thead>
       <tbody>
-        {tasks.map(task => (
-          <tr key={task.id}>
-            <td>{task.title}</td>
-            <td>{task.description}</td>
-            <td>{task.priority.name}</td>
-            <td>{task.status.name}</td>
-            <td>{new Date(task.creationDate).toLocaleDateString()}</td>
-            <td>
-              <button onClick={() => handleEdit(task.id)}>Editar</button>
-              <DeleteButton taskId={task.id} refreshTasks={refreshTasks} />
-            </td>
-          </tr>
-        ))}
+      {
+  tasks && tasks.length > 0 ? (
+    tasks.map(task => (
+      <tr key={task.id}>
+        <td>{task.title}</td>
+        <td>{task.description}</td>
+        <td>{task.priority.name}</td>
+        <td>{task.status.name}</td>
+        <td>{new Date(task.creationDate).toLocaleDateString()}</td>
+        <td>
+          <button onClick={() => handleEdit(task.id)}>Editar</button>
+          <DeleteButton taskId={task.id} refreshTasks={refreshTasks} />
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6">Nenhuma tarefa encontrada</td>
+    </tr>
+  )
+}
+
       </tbody>
     </table>
   );
